@@ -2,10 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: todoapp
-  namespace: todoapp
+  namespace: mateapp
 spec:
   strategy:
-    type: RollingUpdate
+    type: rollingUpdate
     RollingUpdate:
       maxUnavailable: 1
       maxSurge: 1
