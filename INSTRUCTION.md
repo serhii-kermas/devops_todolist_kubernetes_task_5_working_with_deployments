@@ -1,7 +1,9 @@
 How to deploy the app to k8s:
-  kubectl create ns mateapp - create the mateapp namespace. 
-  kubectl apply -f deployment.yml - use the deployment manifest.
-  kubectl apply -f hpa.yml - use the HorizontalPodAutoscaler manifest.
+  kubectl apply -f namespace.yml
+  kubectl apply -f clusterIp.yml
+  kubectl apply -f nodeport.yml
+  kubectl apply -f deployment.yml
+  kubectl apply -f hpa.yml
   
 Choice of resource requests and limits:
   requests:
@@ -24,12 +26,12 @@ Choice of HPA configuration:
   Target CPU and Memory utilization started with 70% as a baselines.
 
 Strategy configuration:
-  RollingUpdate:
+  rollingUpdate:
       maxUnavailable: 1
       maxSurge: 1
   RollingUpdate is the default and safest for most cases.
   Set the maxUnavailable and maxSurge to balance availability and rollout speed.
 
 How to access the app after deployment:
-  port-forward service/todoapp 8081:80 -m mateapp
+  port-forward service/todoapp-svc-cip 8081:80 -n mateapp
   https://localhost:30080 - by use NodePort
